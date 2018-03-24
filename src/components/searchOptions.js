@@ -76,9 +76,9 @@ handleSelectChange(e){
 <br/>
 <br/>
 <div className="bottom-icons">
-<i class="material-icons">gif</i><a href="https://giphy.com/"> Giphy </a>
+<i className="material-icons">gif</i><a href="https://giphy.com/"> Giphy </a>
 <br></br>
-<i class="material-icons">code</i><a href="https://github.com/shraey96/giphy-react-redux">Github</a>
+<i className="material-icons">code</i><a href="https://github.com/shraey96/giphy-react-redux">Github</a>
 </div>
 
   </div>
