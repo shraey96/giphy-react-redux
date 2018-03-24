@@ -3,13 +3,22 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {fetchGIFS} from '../actions/gifAction';
 // import PropTypes from 'prop-types';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { ToastContainer, toast } from 'react-toastify';
 import '../App.css';
 
 class gifResult extends Component {
 
+constructor(){
+  super();
+  this.state = {
+    copied: false
+  };
+
+  this.notify = this.notify.bind(this);
+}
 
   componentWillMount(){
-    // console.log("Mounting");
     this.props.fetchGIFS('minions');
   }
 
@@ -22,6 +31,14 @@ class gifResult extends Component {
   }
 
 
+  notify(){
+    toast.info("Copied!", {
+          position: toast.POSITION.TOP_CENTER,
+           autoClose: 3000
+        });
+  }
+
+
   render() {
 
 
@@ -30,15 +47,30 @@ if(this.props.gifs){
 
   gifsToShow = this.props.gifs.map((gif)=>{
     return(
-      <div key={gif.id}>
-      <img className="loading" src={gif.images.original.url} height="200px" width="350px"/>
+      <div key={gif.id} className="imgteaser">
+        <CopyToClipboard text={gif.images.original.url}
+           onCopy={() => this.setState({copied: true}, ()=>{console.log(this.state);})}>
+            <a href="#">
+        <img className="loading" src={gif.images.original.url} height="200px" width="350px" onClick={this.notify}/>
+         <ToastContainer />
+          <span class="desc">
+            <h3>Click image to copy URL</h3>
+        </span>
+            </a>
+         </CopyToClipboard>
       </div>
+
     )
 
   })
 
 }else {
   gifsToShow = "";
+}
+
+
+if(this.state.copied === true){
+
 }
 
     return (
